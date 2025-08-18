@@ -13,6 +13,7 @@ onLoad(() => {
   console.log('6666', getApp().$u); // 如果有内容，说明已注册
 }) 
 </script>
+
 <style lang="scss">
 @import "uview-plus/index.scss";
 </style>
