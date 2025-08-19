@@ -1,7 +1,6 @@
 {
 	"easycom": {
 		"autoscan": true,
-		// 注意一定要放在custom里，否则无效，https://ask.dcloud.net.cn/question/131175
 		"custom": {
 			"^u--(.*)": "uview-plus/components/u-$1/u-$1.vue",
 			"^up-(.*)": "uview-plus/components/u-$1/u-$1.vue",
@@ -16,18 +15,68 @@
 			}
 		},
 		{
-			"path": "pages/home/index",
+			"path": "pages/detail/index",
 			"style": {
-				"navigationBarTitleText": "首页"
+				"navigationBarTitleText": "明细"
+			}
+		},
+		{
+			"path": "pages/stat/index",
+			"style": {
+				"navigationBarTitleText": "统计"
+			}
+		},
+		{
+			"path": "pages/asset/index",
+			"style": {
+				"navigationBarTitleText": "资产"
 			}
 		},
 		{
 			"path": "pages/my/index",
 			"style": {
-				"navigationBarTitleText": "my"
+				"navigationBarTitleText": "个人中心"
+			}
+		},
+		{
+			"path": "pages/my/ledger",
+			"style": {
+				"navigationBarTitleText": "账本管理"
 			}
 		}
 	],
+	"tabBar": {
+		"color": "#7A7E83",
+		"selectedColor": "#3D7EFF",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [
+			{
+				"pagePath": "pages/detail/index",
+				"text": "明细",
+				"iconPath": "/static/icons/tabBar/growth.png",
+				"selectedIconPath": "/static/icons/tabBar/growth.png"
+			},
+			{
+				"pagePath": "pages/stat/index",
+				"text": "统计",
+				"iconPath": "/static/icons/tabBar/chart.png",
+				"selectedIconPath": "/static/icons/tabBar/chart.png"
+			},
+			{
+				"pagePath": "pages/asset/index",
+				"text": "资产",
+				"iconPath": "/static/icons/tabBar/money.png",
+				"selectedIconPath": "/static/icons/tabBar/money.png"
+			},
+			{
+				"pagePath": "pages/my/index",
+				"text": "我的",
+				"iconPath": "/static/icons/tabBar/dress code.png",
+				"selectedIconPath": "/static/icons/tabBar/dress code.png"
+			}
+		]
+	},
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",

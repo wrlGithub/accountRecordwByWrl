@@ -22,13 +22,12 @@ export default function request<T = any>(path: string, method: HttpMethod, data:
 	// 获取存储token
 	const token = uni.getStorageSync("token") as string | undefined
 	const Authorization =  'Bearer ' + token
-	console.log(1234414, token)
-	if (loading) {
-		uni.showLoading({
-			title: "加载中",
-			mask: true
-		});
-	};
+	// if (loading) {
+	// 	uni.showLoading({
+	// 		title: "加载中",
+	// 		mask: true
+	// 	});
+	// };
 	//根据token进行调用函数
 	if (token && token !== '') {
 		return tokenRequest<T>(path, method, data, loading, Authorization)
@@ -90,7 +89,6 @@ function tokenRequest<T = any>(path: string, method: HttpMethod, data: RequestDa
 				if ((response.data as any)?.code === 40101) {
 					// logout()
 				}
-				console.log(response.data)
 				resolve(response.data as T);
 			},
 			fail(err) {
@@ -102,7 +100,7 @@ function tokenRequest<T = any>(path: string, method: HttpMethod, data: RequestDa
 				reject(err as any);
 			},
 			complete() {
-				uni.hideLoading();
+				// uni.hideLoading();
 			}
 		});
 	});
