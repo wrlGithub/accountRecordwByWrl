@@ -43,6 +43,20 @@
 			"style": {
 				"navigationBarTitleText": "账本管理"
 			}
+		},
+		{
+			"path": "pages/my/ledger-add",
+			"style": {
+				"navigationBarTitleText": "新增账本",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/detail/add-bill",
+			"style": {
+				"navigationBarTitleText": "新增账单",
+				"navigationStyle": "custom"
+			}
 		}
 	],
 	"tabBar": {

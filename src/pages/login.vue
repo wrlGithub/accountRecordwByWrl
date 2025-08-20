@@ -10,7 +10,7 @@
     <!-- Gradient Overlay -->
     <view class="bg-overlay"></view>
 
-    <view class="brand">记账本</view>
+    <view class="brand">如期记账本</view>
     <u-form
       :model="formData"
       :rules="rules"
@@ -44,6 +44,17 @@
         登录
       </u-button>
     </u-form>
+    <view style="margin-top: 60rpx; width: 240rpx;">
+      <u-button
+        type="success"
+        @click="getWxUserProfile"
+        size="middle"
+        shape="circle"
+        style="width: 100%;"
+      >
+        微信一键登录
+      </u-button>
+    </view>
   </view>
 </template>
 
@@ -109,6 +120,56 @@ async function handleLogin() {
     loading.value = false;
   }
 }
+
+// 微信一键登录（带授权弹窗）
+const getWxUserProfile = () => {
+  uni.getUserProfile({
+    desc: '用于完善会员资料',
+    success: async (userInfo) => {
+      // userRes.userInfo 包含头像、昵称等
+      console.log('获取的userInfo',userInfo);
+      uni.login({
+        provider: 'weixin',
+        success: async (res) => {
+          
+          if (res.code) {
+            try {
+              // 发送code和用户信息到后端
+              const data: any = await uni.request({
+                url: 'http://localhost:3000/api/auth/wxlogin',
+                method: 'POST',
+                data: {
+                  code: res.code,
+                  avatar: userRes.userInfo.avatarUrl,
+                  nickname: userRes.userInfo.nickName
+                },
+                header: { 'content-type': 'application/json' }
+              });
+              if (data.data.token) {
+                uni.setStorageSync('token', data.data.token);
+                uni.setStorageSync('userInfo', data.data.user);
+                uni.$u.toast('微信登录成功');
+                uni.switchTab({ url: '/pages/detail/index' });
+              } else {
+                uni.$u.toast('微信登录失败');
+              }
+            } catch (e) {
+              uni.$u.toast('微信登录失败');
+            }
+          } else {
+            uni.$u.toast('微信授权失败');
+          }
+        },
+        fail: () => {
+          uni.$u.toast('微信授权失败');
+        }
+      });
+    },
+    fail: () => {
+      uni.$u.toast('你取消了授权');
+    }
+  });
+};
 </script>
 
 <style scoped lang="scss">
@@ -136,8 +197,9 @@ async function handleLogin() {
 }
 
 .brand {
-  margin-bottom: 40rpx;
-  font-size: 48rpx;
+  font-family: 'newfont';
+  margin-bottom: 90rpx;
+  font-size: 60rpx;
   font-weight: 700;
   color: #f8f9fa;
   letter-spacing: 2rpx;

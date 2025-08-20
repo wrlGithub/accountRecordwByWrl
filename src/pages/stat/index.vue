@@ -1,6 +1,7 @@
 <template>
 	<view class="page">
 		统计
+		<up-search placeholder="日照香炉生紫烟"></up-search>
 	</view>
 </template>
 
